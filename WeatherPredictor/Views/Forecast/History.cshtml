@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WeatherPredictor.Models.DbModels.ForecastHistory>
+
+@{
+    ViewData["Title"] = "Історія прогнозів";
+}
+
+<h2>Історія прогнозів</h2>
+
+@if (!Model.Any())
+{
+    <p>Історія поки що порожня.</p>
+}
+else
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Дата запиту</th>
+                <th>Місто</th>
+                <th>Прогноз API</th>
+                <th>Прогноз ML</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.RequestDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@item.City</td>
+                    <td>@item.ApiForecast</td>
+                    <td>@item.MlForecast</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a class="btn btn-primary mt-3" asp-action="Index">Повернутись до прогнозу</a>
